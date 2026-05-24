@@ -1,0 +1,104 @@
+num,tier,zone,city,company,address,industry
+1,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Anderdon,Crawford Packaging Brampton,"115A Walker Dr, Brampton, ON L6T 5P5, Canada",packaging manufacturer
+2,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Belle River,Plasman - Global Headquarters,"5245 Burke St, Tecumseh, ON N9G 0B9, Canada",plastics manufacturer
+3,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Essex,Ford Motor Co. Essex Engine Plant,"3223 Lauzon Pkwy, Windsor, ON N8T 3C4, Canada",manufacturer
+4,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Essex,Pepsico Beverages Canada,"333 Gosfield Townline W, Essex, ON N8M 2X5, Canada",manufacturer
+5,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Harrow,Atlas Tube,"200 Clark St, Harrow, ON N0R 1G0, Canada",manufacturer
+6,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Harrow,Atlas Tube - Harrow Truck Entrance,"600 Roseborough Rd, Harrow, ON N0R 1G0, Canada",manufacturer
+7,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Harrow,Larry Renaud Ford Sales,"2560 Essex County Rd 20, Harrow, ON N0R 1G0, Canada",automotive parts manufacturer
+8,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Harrow,Sanford and Son Supermarket,"77 King St E, Harrow, ON N0R 1G0, Canada",manufacturer
+9,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,LaSalle,Arcelor Mittal,"300 Sprucewood Ave, Windsor, ON N9C 0B7, Canada",manufacturer
+10,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Lakeshore,Plasman - Tilbury Manufacturing,"24 Industrial Park Rd, Tilbury, ON N0P 2L0, Canada",manufacturing company
+11,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Lakeshore,Reko International Group Inc.,"469 Silver Creek Industrial Dr, Windsor, ON N8N 4W2, Canada",manufacturer
+12,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Lakeshore,SyBridge Technologies,"465 Jutras Dr S, Windsor, ON N8N 5C4, Canada",manufacturer
+13,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Stoney Point,MVA Stratford Inc.,"753 Ontario St, Stratford, ON N5A 3N7, Canada",automotive parts manufacturer
+14,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Tecumseh,Crawford Packaging Essex,"350 South Talbot Rd N, Essex, ON N8M 2X6, Canada",packaging manufacturer
+15,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Tecumseh,Flex N Gate,"538 Blanchard Park, Tecumseh, ON N8N 0B7, Canada",manufacturer
+16,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Tecumseh,MAGNA Integram Windsor Seating (IWS),"201 Patillo Rd, Tecumseh, ON N8N 2L9, Canada",manufacturer
+17,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Windsor,BASF Canada Inc,"845 Wyandotte St W, Windsor, ON N9A 5Y1, Canada",manufacturer
+18,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Windsor,MAGNA Windsor Modules,"9305 Twin Oaks Dr, Windsor, ON N8N 5B8, Canada",OEM manufacturer
+19,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Windsor,OPmobility Canada Inc.,"2570 Central Ave, Windsor, ON N8W 4J5, Canada",manufacturer
+20,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Windsor,Plasman - Tecumseh Manufacturing,"418 Silver Creek Industrial Dr, Windsor, ON N8N 4Y3, Canada",manufacturer
+21,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Windsor,Plasman - Windsor 1 Manufacturing,"5250 Outer Dr, Tecumseh, ON N9G 3B9, Canada",manufacturer
+22,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Windsor,Plasman - Windsor 3 Manufacturing,"635 Sprucewood Ave, Windsor, ON N9C 0B3, Canada",manufacturer
+23,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Windsor,Stellantis (Chrysler) Windsor,"2199 Chrysler Centre, Windsor, ON N8W 3Y3, Canada",manufacturer
+24,Tier 1A — Multinational / Major OEM,Zone 1 — Windsor / Essex County,Windsor,Windsor Mold Group,"4035 Malden Rd, Windsor, ON N9C 2G4, Canada",manufacturer
+25,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Blenheim,ANDRITZ Canada Inc.,"3 Allison Line, Blenheim, ON N0P 1A0, Canada",manufacturer
+26,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Blenheim,Dana's Kitchen & Catering,"221 Talbot St W, Blenheim, ON N0P 1A0, Canada",food manufacturer
+27,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Blenheim,Woodbridge Foam Corporation,"140 Cathcart St, Blenheim, ON N0P 1A0, Canada",manufacturer
+28,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,Barry Callebaut Canada,"390 Colborne St, Chatham, ON N7M 5J4, Canada",manufacturer
+29,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,Dajcor Aluminum Ltd,"155 Irwin St, Chatham, ON N7M 0N5, Canada",manufacturer
+30,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,Dana Canada Corporation,"1010 Richmond St, Chatham, ON N7M 5J5, Canada",manufacturer
+31,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,"Greenfield Global Inc, Chatham","275 Bloomfield Rd, Chatham, ON N7M 0N6, Canada",manufacturer
+32,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,Linde Canada Inc - Carbon Dioxide Production Plant,"275 Bloomfield Rd, Chatham, ON N7M 0N6, Canada",manufacturing company
+33,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,Linde Canada Inc.,"116 Byng Ave, Chatham, ON N7M 3E2, Canada",manufacturer
+34,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,Pioneer Hi-Bred Canada Company,"650 Riverview Dr, Chatham, ON N7M 5J5, Canada",manufacturer
+35,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,Sonoco Canada Corporation,"674 Richmond St, Chatham, ON N7M 5K4, Canada",manufacturer
+36,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham,Vitesco Technologies,"700 Park Ave E, Chatham, ON N7M 5J4, Canada",manufacturer
+37,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Chatham Kent,Martinrea Metallic Canada Inc.,"99 Golf Course Line, Ridgetown, ON N0P 2C0, Canada",manufacturing company
+38,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Dresden,Conagra Brands,"759 Wellington St, Dresden, ON N0P 1M0, Canada",manufacturer
+39,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Dresden,Martinrea Fabco Metallic,"1130 Wellington St, Dresden, ON N0P 1M0, Canada",manufacturer
+40,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Dresden,Weatherford Canada,"25351 Kent Bridge Rd, Dresden, ON N0P 1M0, Canada",OEM manufacturer
+41,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Erie Beach,Siltech Corporation,"1700 Pettit Rd, Fort Erie, ON L2A 5M4, Canada",manufacturer
+42,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Mitchell's Bay,Siltech Corporation,"225 Wicksteed Ave, East York, ON M4H 1G5, Canada",manufacturing company
+43,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Wallaceburg,Progressive Ford Parts,"6975 Base Line E, Wallaceburg, ON N8A 5J6, Canada",automotive parts manufacturer
+44,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Wallaceburg,Progressive Ford Sales Inc.,"6975 Base Line, Wallaceburg, ON N8A 5J6, Canada",automotive parts manufacturer
+45,Tier 1A — Multinational / Major OEM,Zone 2 — Chatham-Kent,Wallaceburg,Wabtec Foundry,"40 Mason St, Wallaceburg, ON N8A 4M1, Canada",manufacturer
+46,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Corunna,Air Products Canada Ltd,"150 St Clair Pkwy, Corunna, ON N0N 1G0, Canada",manufacturer
+47,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Corunna,Dow Canada,"291 Albert St, Corunna, ON N0N 1J0, Canada",manufacturer
+48,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Corunna,Nova Chemicals,"285 Albert St, Corunna, ON N0N 1G0, Canada",manufacturer
+49,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Corunna,Shell Canada Products Limited,"150 St Clair Pkwy, Corunna, ON N0N 1G0, Canada",manufacturer
+50,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Courtright,CF Industries - Courtright Nitrogen Complex,"161 Bickford Line, Courtright, ON N0N 1H0, Canada",manufacturer
+51,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Courtright,Terra International (Canada) Inc,"161 Bickford Line, Courtright, ON N0N 1H0, Canada",manufacturer
+52,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Forest,Forest Ford,"101 Main St S, Forest, ON N0N 1J0, Canada",automotive parts manufacturer
+53,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Sarnia,Arlanxeo,"1265 Vidal St S, Sarnia, ON N7T 7Y2, Canada",manufacturer
+54,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Sarnia,Arlanxeo Butyl Unit,"Sarnia, ON N7T 7J2, Canada",food manufacturer
+55,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Sarnia,Borouge International - Corunna Site,"785 Petrolia Line, Corunna, ON N0N 1G0, Canada",manufacturer
+56,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Sarnia,Borouge International - Rokeby Site,"804 Rokeby Line, Corunna, ON N0N 1M0, Canada",OEM manufacturer
+57,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Sarnia,Cabot Canada Ltd,"800 Tashmoo Ave, Sarnia, ON N7T 7N4, Canada",manufacturer
+58,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Sarnia,NOVA Chemicals Corporation Corunna Plant,"ON-40, St. Clair, ON N0N 1G0, Canada",plastics manufacturer
+59,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Sarnia,Nova Chemicals - Moore Site,"510 Moore Line, Mooretown, ON N0N 1M0, Canada",OEM manufacturer
+60,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Sarnia,Shell Sarnia Manufacturing Centre,"130 St Clair Pkwy, Corunna, ON N0N 1G0, Canada",manufacturer
+61,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,St. Clair,Cargill Salt,"916 S Riverside Ave St, St Clair, MI 48079, USA",manufacturer
+62,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,St. Clair,Dana Incorporated,"2020 Christian B Haas Dr, St Clair, MI 48079, USA",manufacturer
+63,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,St. Clair,LaFontaine Ford St. Clair Parts Store,"1200 S Carney Dr, St Clair, MI 48079, USA",automotive parts manufacturer
+64,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,St. Clair,Magna Electric Vehicle Structures,"1811 S Range Rd, St Clair, MI 48079, USA",manufacturer
+65,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,St. Clair,Magna International,"4662 Puttygut Rd, China Township, MI 48054, USA",automotive parts manufacturer
+66,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,St. Clair,Magna Structures St Clair,"1811 S Range Rd, St Clair, MI 48079, USA",manufacturer
+67,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Thedford,Crawford Packaging,"3036 Page St, London, ON N5V 4P2, Canada",packaging manufacturer
+68,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Thedford,Thedford Village Complex,"109 Pearl St, Thedford, ON N0M 2N0, Canada",manufacturer
+69,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Watford,Carquest Auto Parts - Watford Auto Parts,"7890 Industrial Dr, Watford, ON N0M 2S0, Canada",OEM manufacturer
+70,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Watford,Delta Power Equipment (Watford),"5523 Nauvoo Rd, Watford, ON N0M 2S0, Canada",manufacturer
+71,Tier 1A — Multinational / Major OEM,Zone 3 — Sarnia / Lambton County,Watford,McCann Redi-Mix - Watford Plant,"5556 Nauvoo Rd, Watford, ON N0M 2S0, Canada",manufacturer
+72,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,Bayham,Martinrea,"301 Tillson Ave, Tillsonburg, ON N4G 3B5, Canada",manufacturing company
+73,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,Bayham,Oxford Packaging,"24 Clearview Dr, Tillsonburg, ON N4G 4G8, Canada",packaging manufacturer
+74,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,Dutton,Cotrac Ford Lincoln,"204 Currie Rd, Dutton, ON N0L 1J0, Canada",manufacturer
+75,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,Ingersoll,Cargill,"50 Chisholm Dr, Ingersoll, ON N5C 3B3, Canada",manufacturer
+76,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,London,Arcelor Mittal,"2440 Scanlan St, London, ON N5W 6G8, Canada",automotive parts manufacturer
+77,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,London,Bradford Canada,"4070 White Oak Road, London, ON N6E 0B1, Canada",packaging manufacturer
+78,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,London,Crawford Metal Corporation,"3101 Gore Rd, London, ON N5V 5C8, Canada",metal fabrication
+79,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,Lucan,Langford Auto Parts,"6255 William St, Lucan, ON N0M 2J0, Canada",automotive parts manufacturer
+80,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,Middlesex Centre,Gentek Building Products - Window Manufacturing Plant,"6320 Colonel Talbot Rd, London, ON N6P 1J1, Canada",manufacturing company
+81,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,St. Marys,Caledon Tubing a division of Martinrea Intl,"580 James St S, St. Marys, ON N4X 1A8, Canada",manufacturer
+82,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,St. Thomas,Magna International Inc,"170 Edward St, St Thomas, ON N5P 4B4, Canada",manufacturer
+83,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,St. Thomas,Prestran Industries A div of Magna Industrial 2,"1155 Talbot St, St Thomas, ON N5P 1G6, Canada",manufacturing company
+84,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,Strathroy,Cargill Limited,"0A3,, 127 Zimmerman St S, Strathroy, ON N7G 0A3, Canada",manufacturer
+85,Tier 1A — Multinational / Major OEM,Zone 4 — London / Middlesex,Thames Centre,Cargill Canada,"10 Cuddy Blvd, London, ON N5V 5E3, Canada",food manufacturer
+86,Tier 1A — Multinational / Major OEM,Zone 5 — Woodstock / Oxford County,Burgessville,Oxford Concrete Forming Inc,"385522 Oxford 59, Burgessville, ON N0J 1C0, Canada",manufacturer
+87,Tier 1A — Multinational / Major OEM,Zone 5 — Woodstock / Oxford County,Burgessville,Oxford Pallet & Recyclers Ltd.,"285711 Airport Rd, Norwich, ON N0J 1P0, Canada",manufacturing company
+88,Tier 1A — Multinational / Major OEM,Zone 5 — Woodstock / Oxford County,East Zorra-Tavistock,Oxford Agropro Ltd,"596222 Oxford 59, Hickson, ON N0J 1L0, Canada",manufacturer
+89,Tier 1A — Multinational / Major OEM,Zone 5 — Woodstock / Oxford County,Norwich,Salford Group,"20 Phebe St, Norwich, ON N0J 1P0, Canada",OEM manufacturer
+90,Tier 1A — Multinational / Major OEM,Zone 5 — Woodstock / Oxford County,Otterville,Carquest Auto Parts - Partner Automotive & Industrial Supply -Waterford,"789 Old Hwy 24, Waterford, ON N0E 1Y0, Canada",automotive parts manufacturer
+91,Tier 1A — Multinational / Major OEM,Zone 5 — Woodstock / Oxford County,Tavistock,Pioneer Hi-Bred Ltd,"596779 Oxford 59, Tavistock, ON N4S 7W1, Canada",manufacturer
+92,Tier 1A — Multinational / Major OEM,Zone 5 — Woodstock / Oxford County,Woodstock,ArcelorMittal,"193 Givins St, Woodstock, ON N4S 0A7, Canada",manufacturer
+93,Tier 1A — Multinational / Major OEM,Zone 5 — Woodstock / Oxford County,Zorra,Stratford Metal Products Ltd,"521 Erie St, Stratford, ON N5A 2N7, Canada",metal fabrication
+94,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,Crawford Packaging Cambridge,"1165 Franklin Blvd Unit K, Cambridge, ON N1R 8E1, Canada",packaging manufacturer
+95,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,Dana Canada Corporation,"401 Franklin Blvd, Cambridge, ON N1R 8G8, Canada",manufacturer
+96,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,PepsiCo Foods Canada,"1001 Bishop St N, Cambridge, ON N3H 4V8, Canada",food manufacturer
+97,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Centre Wellington,Dana Thermal Products Group,"503 Main St N, Mount Forest, ON N0G 2L2, Canada",manufacturer
+98,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Elmira,Linde Canada Inc.,"25 Industrial Dr Unit 9B, Elmira, ON N3B 3K3, Canada",manufacturer
+99,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Kitchener,Woodbridge Foam Corporation,"68 Shirley Ave, Kitchener, ON N2B 2E1, Canada",packaging manufacturer
+100,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Listowel,Listowel Ford,"1199 Wallace Ave N, Listowel, ON N4W 3J1, Canada",OEM manufacturer
+101,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Palmerston,Dana's Gift Creations,"320 Daly St, Palmerston, ON N0G 2P0, Canada",food manufacturer
+102,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Puslinch,Organic Meadow Limited Partnership,"362 Laird Rd, Guelph, ON N1G 4P7, Canada",food manufacturer
+103,Tier 1A — Multinational / Major OEM,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Stratford,PepsiCo Foods Canada,"85 Dunlop Pl, Stratford, ON N4Z 0A6, Canada",food manufacturer
