@@ -5,6 +5,7 @@ Google Places API lead extraction script for Southwestern Ontario OEM/industrial
 import argparse
 import csv
 import os
+import re
 import sys
 import time
 from datetime import datetime
@@ -190,13 +191,17 @@ def call_places_api(api_key: str, query_info: dict) -> tuple[int, list[dict], st
 
         data = resp.json()
         places_raw = data.get("places", [])
+        ontario_pat = re.compile(r',\s*ON\b|,\s*Ontario\b', re.IGNORECASE)
         results = []
         for p in places_raw:
+            addr = p.get("formattedAddress", "")
+            if not ontario_pat.search(addr):
+                continue  # skip non-Ontario results
             results.append(
                 {
                     "place_id": p.get("id", ""),
                     "company_name": (p.get("displayName") or {}).get("text", ""),
-                    "formatted_address": p.get("formattedAddress", ""),
+                    "formatted_address": addr,
                     "city_searched": query_info["city"],
                     "zone": query_info["zone"],
                     "keyword_searched": query_info["keyword"],

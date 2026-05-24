@@ -52,6 +52,12 @@ def is_address_name(name: str) -> bool:
     return bool(ADDRESS_NAME_PAT.match(str(name).strip()))
 
 
+ONTARIO_PAT = re.compile(r',\s*ON\b|,\s*Ontario\b', re.IGNORECASE)
+
+def is_ontario(address: str) -> bool:
+    return bool(ONTARIO_PAT.search(str(address)))
+
+
 def dedup_key(place_id, name, address):
     if place_id:
         return f"id:{place_id}"
@@ -151,9 +157,11 @@ def run(output_dir):
             with open(raw_path, "a", newline="", encoding="utf-8") as f:
                 csv.DictWriter(f, fieldnames=RAW_COLS, extrasaction="ignore").writerows(results)
 
-            # Filter to genuinely new companies (skip address-as-name junk records)
+            # Filter to genuinely new Ontario-only companies
             for r in results:
                 if is_address_name(r["company_name"]):
+                    continue
+                if not is_ontario(r["formatted_address"]):
                     continue
                 key = dedup_key(r["place_id"], r["company_name"], r["formatted_address"])
                 if key not in seen_keys:
