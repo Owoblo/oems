@@ -11,6 +11,8 @@ from datetime import datetime
 
 import pandas as pd
 import requests
+from openpyxl.styles import Font, PatternFill, Alignment
+from openpyxl.utils import get_column_letter
 
 # ---------------------------------------------------------------------------
 # Geography & keywords
@@ -337,6 +339,80 @@ def run(args) -> None:
     print(f"  Deduped results   : {total_deduped}")
     print(f"  Output directory  : {args.output_dir}")
     print(f"{'='*60}")
+
+    if total_deduped > 0:
+        print("\nExporting XLSX…")
+        xlsx_path = export_xlsx(args.output_dir)
+        print(f"  Saved: {xlsx_path}")
+
+
+# ---------------------------------------------------------------------------
+# XLSX export
+# ---------------------------------------------------------------------------
+
+def export_xlsx(output_dir: str) -> str:
+    """Export deduped_companies.csv to a formatted XLSX file."""
+    csv_path = os.path.join(output_dir, "deduped_companies.csv")
+    xlsx_path = os.path.join(output_dir, "deduped_companies.xlsx")
+
+    df = pd.read_csv(csv_path)
+
+    with pd.ExcelWriter(xlsx_path, engine="openpyxl") as writer:
+        # --- Main leads sheet ---
+        df.to_excel(writer, sheet_name="All Leads", index=False)
+        ws = writer.sheets["All Leads"]
+
+        # Header styling
+        header_fill = PatternFill(fill_type="solid", fgColor="1F4E79")
+        header_font = Font(bold=True, color="FFFFFF", size=11)
+        for cell in ws[1]:
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = Alignment(horizontal="center", vertical="center")
+
+        # Column widths
+        col_widths = {
+            "place_id": 30, "company_name": 45, "formatted_address": 55,
+            "city_searched": 20, "zone": 42, "keyword_searched": 28, "raw_query": 55,
+        }
+        for i, col in enumerate(df.columns, 1):
+            ws.column_dimensions[get_column_letter(i)].width = col_widths.get(col, 20)
+
+        # Freeze header row
+        ws.freeze_panes = "A2"
+
+        # --- Per-zone sheets ---
+        for zone_name, zone_df in df.groupby("zone"):
+            short = zone_name.split("—")[-1].strip()[:28]
+            zone_df.to_excel(writer, sheet_name=short, index=False)
+            ws2 = writer.sheets[short]
+            for cell in ws2[1]:
+                cell.fill = header_fill
+                cell.font = header_font
+                cell.alignment = Alignment(horizontal="center", vertical="center")
+            for i, col in enumerate(zone_df.columns, 1):
+                ws2.column_dimensions[get_column_letter(i)].width = col_widths.get(col, 20)
+            ws2.freeze_panes = "A2"
+
+        # --- Summary sheet ---
+        summary = (
+            df.groupby("zone")
+            .agg(unique_companies=("place_id", "nunique"), cities_covered=("city_searched", "nunique"))
+            .reset_index()
+        )
+        summary.columns = ["Zone", "Unique Companies", "Cities Covered"]
+        summary.to_excel(writer, sheet_name="Summary", index=False)
+        ws3 = writer.sheets["Summary"]
+        for cell in ws3[1]:
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = Alignment(horizontal="center", vertical="center")
+        ws3.column_dimensions["A"].width = 45
+        ws3.column_dimensions["B"].width = 20
+        ws3.column_dimensions["C"].width = 20
+        ws3.freeze_panes = "A2"
+
+    return xlsx_path
 
 
 # ---------------------------------------------------------------------------
