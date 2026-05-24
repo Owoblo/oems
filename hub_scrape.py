@@ -37,6 +37,21 @@ unit_pat = re.compile(
 )
 
 
+# Matches names that are actually street addresses, not company names
+ADDRESS_NAME_PAT = re.compile(
+    r'^\d+\s+\w'           # starts with a number then a word (e.g. "550 Trillium")
+    r'|^unit\s*[#\d]'      # "Unit #11" / "Unit 4"
+    r'|^lot\s*[#\d]'
+    r'|^suite\s*[#\d]'
+    r'|^bay\s*[#\d]',
+    re.IGNORECASE
+)
+
+def is_address_name(name: str) -> bool:
+    """Return True if the displayName looks like a street address, not a business."""
+    return bool(ADDRESS_NAME_PAT.match(str(name).strip()))
+
+
 def dedup_key(place_id, name, address):
     if place_id:
         return f"id:{place_id}"
@@ -136,8 +151,10 @@ def run(output_dir):
             with open(raw_path, "a", newline="", encoding="utf-8") as f:
                 csv.DictWriter(f, fieldnames=RAW_COLS, extrasaction="ignore").writerows(results)
 
-            # Filter to genuinely new companies
+            # Filter to genuinely new companies (skip address-as-name junk records)
             for r in results:
+                if is_address_name(r["company_name"]):
+                    continue
                 key = dedup_key(r["place_id"], r["company_name"], r["formatted_address"])
                 if key not in seen_keys:
                     seen_keys.add(key)
