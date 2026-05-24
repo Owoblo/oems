@@ -1,0 +1,5 @@
+timestamp,street,sample_address,lat,lng,status_code,raw_results,new_results,error_message
+2026-05-24T18:05:48Z,Main St,"6337 Main St, Comber, ON N0P 1J0, Canada",42.23286,-82.552872,200,20,12,
+2026-05-24T18:05:49Z,Main St W,"13 Main St W, Kingsville, ON N9Y 1H2, Canada",42.0377389,-82.7402508,200,20,19,
+2026-05-24T18:05:50Z,Industrial Rd,"55 Industrial Rd, Leamington, ON N8H 2B8, Canada",42.0487001,-82.6093863,200,19,13,
+2026-05-24T18:05:51Z,Dundas St,"1401 Dundas St, Innerkip, ON N0J 1M0, Canada",43.13760449999999,-80.7093639,200,20,17,
