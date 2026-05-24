@@ -1,5 +1,8 @@
 timestamp,zone,city,keyword,raw_query,status_code,number_of_results,error_message
-2026-05-24T16:36:14Z,Zone 4 — London / Middlesex,London,manufacturer,"manufacturer in London, Ontario, Canada",403,0,"{
+2026-05-24T16:40:23Z,Zone 4 — London / Middlesex,London,manufacturer,"manufacturer in London, Ontario, Canada",200,20,
+2026-05-24T16:40:24Z,Zone 4 — London / Middlesex,London,machine shop,"machine shop in London, Ontario, Canada",200,20,
+2026-05-24T16:40:24Z,Zone 4 — London / Middlesex,London,metal fabrication,"metal fabrication in London, Ontario, Canada",200,20,
+2026-05-24T16:40:25Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Kitchener,manufacturer,"manufacturer in Kitchener, Ontario, Canada",403,0,"{
   ""error"": {
     ""code"": 403,
     ""message"": ""The caller does not have permission"",
@@ -7,67 +10,8 @@ timestamp,zone,city,keyword,raw_query,status_code,number_of_results,error_messag
   }
 }
 "
-2026-05-24T16:36:15Z,Zone 4 — London / Middlesex,London,machine shop,"machine shop in London, Ontario, Canada",403,0,"{
-  ""error"": {
-    ""code"": 403,
-    ""message"": ""The caller does not have permission"",
-    ""status"": ""PERMISSION_DENIED""
-  }
-}
-"
-2026-05-24T16:36:15Z,Zone 4 — London / Middlesex,London,metal fabrication,"metal fabrication in London, Ontario, Canada",403,0,"{
-  ""error"": {
-    ""code"": 403,
-    ""message"": ""The caller does not have permission"",
-    ""status"": ""PERMISSION_DENIED""
-  }
-}
-"
-2026-05-24T16:36:16Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Kitchener,manufacturer,"manufacturer in Kitchener, Ontario, Canada",403,0,"{
-  ""error"": {
-    ""code"": 403,
-    ""message"": ""The caller does not have permission"",
-    ""status"": ""PERMISSION_DENIED""
-  }
-}
-"
-2026-05-24T16:36:17Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Kitchener,machine shop,"machine shop in Kitchener, Ontario, Canada",403,0,"{
-  ""error"": {
-    ""code"": 403,
-    ""message"": ""The caller does not have permission"",
-    ""status"": ""PERMISSION_DENIED""
-  }
-}
-"
-2026-05-24T16:36:17Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Kitchener,metal fabrication,"metal fabrication in Kitchener, Ontario, Canada",403,0,"{
-  ""error"": {
-    ""code"": 403,
-    ""message"": ""The caller does not have permission"",
-    ""status"": ""PERMISSION_DENIED""
-  }
-}
-"
-2026-05-24T16:36:18Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,manufacturer,"manufacturer in Cambridge, Ontario, Canada",403,0,"{
-  ""error"": {
-    ""code"": 403,
-    ""message"": ""The caller does not have permission"",
-    ""status"": ""PERMISSION_DENIED""
-  }
-}
-"
-2026-05-24T16:36:18Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,machine shop,"machine shop in Cambridge, Ontario, Canada",403,0,"{
-  ""error"": {
-    ""code"": 403,
-    ""message"": ""The caller does not have permission"",
-    ""status"": ""PERMISSION_DENIED""
-  }
-}
-"
-2026-05-24T16:36:19Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,metal fabrication,"metal fabrication in Cambridge, Ontario, Canada",403,0,"{
-  ""error"": {
-    ""code"": 403,
-    ""message"": ""The caller does not have permission"",
-    ""status"": ""PERMISSION_DENIED""
-  }
-}
-"
+2026-05-24T16:40:26Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Kitchener,machine shop,"machine shop in Kitchener, Ontario, Canada",200,20,
+2026-05-24T16:40:27Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Kitchener,metal fabrication,"metal fabrication in Kitchener, Ontario, Canada",200,20,
+2026-05-24T16:40:27Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,manufacturer,"manufacturer in Cambridge, Ontario, Canada",200,20,
+2026-05-24T16:40:28Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,machine shop,"machine shop in Cambridge, Ontario, Canada",200,20,
+2026-05-24T16:40:29Z,Zone 6 — Kitchener / Waterloo / Cambridge / Guelph,Cambridge,metal fabrication,"metal fabrication in Cambridge, Ontario, Canada",200,20,
