@@ -383,7 +383,7 @@ def export_xlsx(output_dir: str) -> str:
 
         # --- Per-zone sheets ---
         for zone_name, zone_df in df.groupby("zone"):
-            short = zone_name.split("—")[-1].strip()[:28]
+            short = zone_name.split("—")[-1].strip().replace("/", "-")[:28]
             zone_df.to_excel(writer, sheet_name=short, index=False)
             ws2 = writer.sheets[short]
             for cell in ws2[1]:
