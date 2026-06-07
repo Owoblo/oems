@@ -1,7 +1,7 @@
 """
 Saturn Star Movers — Batch Partnership Letter Generator
-Clean one-page letter: plain white, logo top-right, thin margins,
-bold phone, no decorative chrome, personal founder tone.
+Clean one-page letter: plain white, branch-specific address, logo top-right,
+thin margins, bold phone, personal founder tone.
 
 Usage:
     python3 generate_letters.py [logo.png]
@@ -16,7 +16,6 @@ from reportlab.lib.units import inch
 from reportlab.lib.colors import HexColor, white, black
 from reportlab.platypus import Paragraph
 from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.enums import TA_JUSTIFY, TA_LEFT, TA_CENTER
 
 NAVY  = HexColor("#1B2A6B")
 GOLD  = HexColor("#F5A800")
@@ -24,14 +23,13 @@ GREY  = HexColor("#333333")
 LGREY = HexColor("#666666")
 
 PAGE_W, PAGE_H = letter
-ML = 0.65 * inch   # thin margins
+ML = 0.65 * inch
 MR = 0.65 * inch
 MT = 0.70 * inch
 MB = 0.55 * inch
 
-SSM_CELL    = "226-724-1730"   # John's personal cell — always shown
+SSM_CELL = "226-724-1730"
 
-# ── BRANCH LOCATIONS (from Google Business Profile master sheet) ──────────────
 BRANCHES = {
     "windsor": {
         "address1": "3608 Seminole Street, Unit 3",
@@ -78,23 +76,21 @@ BRANCHES = {
 }
 
 def branch_for_zone(zone, city):
-    """Return the nearest branch dict based on zone/city."""
-    z, c = zone.lower(), city.lower()
-    if "chatham" in z or "chatham" in c:
+    z = zone.lower()
+    c = city.lower()
+    if "zone 2" in z or "chatham" in z or "chatham" in c:
         return BRANCHES["chatham"]
-    if "london" in z or "london" in c:
+    if "zone 4" in z or "london" in z or "london" in c:
         return BRANCHES["london"]
-    if "guelph" in z or "guelph" in c:
+    if "zone 5" in z or "woodstock" in z or "woodstock" in c or "brantford" in c:
         return BRANCHES["guelph"]
+    if "zone 6" in z or "kitchener" in z or "kitchener" in c or "cambridge" in c:
+        return BRANCHES["kitchener"]
     if "waterloo" in z or "waterloo" in c:
         return BRANCHES["waterloo"]
-    if "kitchener" in z or "kitchener" in c or "cambridge" in c:
-        return BRANCHES["kitchener"]
-    if "woodstock" in c or "brantford" in c or "paris" in c:
+    if "guelph" in z or "guelph" in c:
         return BRANCHES["guelph"]
-    if "sarnia" in z or "sarnia" in c or "lambton" in z:
-        return BRANCHES["windsor"]
-    return BRANCHES["windsor"]   # default
+    return BRANCHES["windsor"]
 
 KW_CITIES = {
     "kitchener","waterloo","cambridge","guelph","woodstock","ayr","breslau",
@@ -117,18 +113,13 @@ def classify(title):
     return "owner"
 
 def region_label(zone, city):
-    if "Windsor" in zone or "Essex" in zone:
-        return "Windsor-Essex"
-    elif "Chatham" in zone:
-        return "Chatham-Kent"
-    elif "Sarnia" in zone or "Lambton" in zone:
-        return "Sarnia-Lambton"
-    elif "London" in zone:
-        return "London"
-    elif any(x in zone for x in ("Kitchener","Waterloo","Cambridge","Guelph")):
-        return "Kitchener-Waterloo"
-    elif "Woodstock" in zone or "Brantford" in zone:
-        return "Woodstock-Brantford"
+    z = zone.lower()
+    if "zone 1" in z or "windsor" in z or "essex" in z: return "Windsor-Essex"
+    if "zone 2" in z or "chatham" in z:                 return "Chatham-Kent"
+    if "zone 3" in z or "sarnia" in z or "lambton" in z: return "Sarnia-Lambton"
+    if "zone 4" in z or "london" in z:                  return "London"
+    if "zone 5" in z or "woodstock" in z:               return "Woodstock-Oxford"
+    if "zone 6" in z:                                    return "Kitchener-Waterloo"
     return city
 
 def build_content(row):
@@ -136,71 +127,63 @@ def build_content(row):
     company = row["company"].strip()
     city    = row["city"].strip()
     title   = row["title"].strip()
-    zone    = row.get("zone","")
+    zone    = row.get("zone", "")
     group   = classify(title)
-    is_kw   = city.lower() in KW_CITIES
+    is_kw   = city.lower() in KW_CITIES or "zone 6" in zone.lower()
     region  = region_label(zone, city)
     branch  = branch_for_zone(zone, city)
 
-    # Para 1 — personal opening, mention their name and company
     if group == "owner":
         p1 = (
-            f"My name is John Owolabi, and I'm the founder of <i>Saturn Star Movers</i>, "
+            f"My name is John Owolabi, and I am the founder of <i>Saturn Star Movers</i>, "
             f"a fast-growing, fully insured moving company serving the "
-            f"<b>{region}</b> area. {first}, I'm reaching out to you personally because "
-            f"<b>{company}</b> is exactly the kind of company we'd be proud to build "
+            f"<b>{region}</b> area. {first}, I am reaching out to you personally because "
+            f"<b>{company}</b> is exactly the kind of company we would be proud to build "
             f"a long-term relationship with."
+        )
+        p2 = (
+            f"Companies like <b>{company}</b> deal with moving situations throughout the year: "
+            f"a manager relocates, a new hire moves into the area, an office gets rearranged, "
+            f"or furniture needs to shift between locations. Right now, someone on your team "
+            f"is handling that scramble. I want to take it off their plate, and off yours."
         )
     else:
         p1 = (
             f"My name is John Owolabi, founder of <i>Saturn Star Movers</i>, "
             f"a fully insured moving company serving the <b>{region}</b> area. "
-            f"{first}, I'm reaching out because operations teams at companies like "
+            f"{first}, I am reaching out because operations teams at companies like "
             f"<b>{company}</b> are often the first to feel the pain when a moving "
             f"need comes up with no reliable contact in place."
         )
-
-    # Para 2 — the real problem they face, name their company again
-    if group == "owner":
-        p2 = (
-            f"Companies like <b>{company}</b> deal with moving situations throughout "
-            f"the year: a manager relocates, a new hire moves into the area, an office "
-            f"gets rearranged, or furniture needs to shift between locations. Right now, "
-            f"someone on your team is handling that scramble. I want to take it off their plate, "
-            f"and off yours."
-        )
-    else:
         p2 = (
             f"For plant and operations teams at <b>{company}</b>, it comes up more than "
-            f"you'd expect: internal equipment moves, facility rearrangements, employee "
+            f"you would expect: internal equipment moves, facility rearrangements, employee "
             f"relocations, overflow labour when the team is stretched, or last-minute "
             f"support that falls outside normal operations. Instead of scrambling, "
             f"I want your team to already have a number to call."
         )
 
-    # KW credibility
     kw_line = None
     if is_kw:
         kw_line = (
             f"We recently supported a large manufacturing and engineering group in the "
-            f"<b>Kitchener</b> area with a full facility/location move, so we understand "
-            f"the level of coordination and care that industrial companies expect. "
-            f"We are actively building more partnerships like that across the "
-            f"<b>Kitchener-Waterloo, Cambridge, and Guelph</b> corridor."
+            f"<b>Kitchener</b> area with a full facility move, so we understand the level "
+            f"of coordination and care that industrial companies expect. "
+            f"We are actively building more partnerships like that across "
+            f"<b>Kitchener-Waterloo, Cambridge, and Guelph</b>."
         )
 
-    # Para 3 — the offer
     p3 = (
         f"Here is what I am proposing for <b>{company}</b>, at no cost to the company: "
         f"a preferred-rate partnership where your employees receive a dedicated discount "
-        f"on any local or long-distance move, priority scheduling, and a direct line to me "
-        f"personally. Your team pays less. Your company pays nothing. "
+        f"on any local or long-distance move, priority scheduling, and a direct line to "
+        f"me personally. Your team pays less. Your company pays nothing. "
         f"And {first}, you get to offer your people something genuinely useful."
     )
 
     cta = (
         f"I would love a quick 10-minute call with you, {first}. "
-        f"Call or text me directly at <b>226-724-1730</b> and I will make it easy on your end."
+        f"Call or text me directly at <b>{SSM_CELL}</b> and I will make it easy on your end."
     )
 
     return dict(first=first, company=company, city=city, region=region,
@@ -208,9 +191,7 @@ def build_content(row):
 
 
 def draw_letterhead(c, branch, logo_path):
-    """Logo top-right, branch address top-left, thin gold rule below."""
-    logo_w = 1.3 * inch
-    logo_h = 1.0 * inch
+    logo_w, logo_h = 1.3*inch, 1.0*inch
     logo_x = PAGE_W - MR - logo_w
     logo_y = PAGE_H - MT - logo_h + 0.1*inch
     if logo_path and os.path.exists(logo_path):
@@ -243,108 +224,96 @@ def draw_letterhead(c, branch, logo_path):
 
 
 def generate_letter(row, out_path, logo_path=None):
-    data  = build_content(row)
-    today = date.today().strftime("%B %d, %Y")
-
+    data   = build_content(row)
     branch = data["branch"]
+    today  = date.today().strftime("%B %d, %Y")
+
     c = pdfcanvas.Canvas(out_path, pagesize=letter)
     draw_letterhead(c, branch, logo_path)
 
     text_w = PAGE_W - ML - MR
-    x      = ML
-    y      = PAGE_H - MT - 1.12*inch   # just below rule
+    x = ML
+    y = PAGE_H - MT - 1.12*inch
 
     body_s = ParagraphStyle("b", fontName="Helvetica", fontSize=10.2,
                              leading=15.8, textColor=GREY, alignment=4)
     bul_s  = ParagraphStyle("bl", fontName="Helvetica", fontSize=10.0,
                              leading=14.8, textColor=GREY, leftIndent=12)
-    sm_s   = ParagraphStyle("sm", fontName="Helvetica", fontSize=9.2,
-                             leading=13.5, textColor=LGREY)
 
-    def write(text, style, gap_after=0.13):
+    def write(text, style, gap=0.13):
         p = Paragraph(text, style)
         _, h = p.wrap(text_w, 999)
         p.drawOn(c, x, y - h)
-        return y - h - gap_after * inch
+        return y - h - gap * inch
 
-    # Date
     c.setFont("Helvetica", 9.5)
     c.setFillColor(LGREY)
     c.drawString(x, y, today)
-    y -= 0.26 * inch
+    y -= 0.26*inch
 
-    # Salutation — first name, bold
     c.setFont("Helvetica-Bold", 11)
     c.setFillColor(GREY)
     c.drawString(x, y, f"Hi {data['first']},")
-    y -= 0.28 * inch
+    y -= 0.28*inch
 
-    # Body
     for para in [data["p1"], data["p2"]]:
         y = write(para, body_s, 0.12)
 
-    # Bullet block
-    y -= 0.04 * inch
+    y -= 0.04*inch
     y = write(f"Here is what the partnership includes for <b>{data['company']}</b>:", body_s, 0.08)
-    bullets = [
+    for b in [
         "A <b>dedicated staff discount</b> on all local and long-distance moves",
         "<b>Full-service support</b>: packing, transport, unloading, and everything between",
         "A <b>Personal Moving Concierge</b>: one dedicated contact from start to finish",
         "<b>Priority scheduling</b> and on-time pickup and delivery, guaranteed",
         "<b>Licensed and fully insured</b>: your people and their belongings are protected",
-    ]
-    for b in bullets:
+    ]:
         y = write(f"  &#8226;  {b}", bul_s, 0.06)
-    y -= 0.06 * inch
+    y -= 0.06*inch
 
-    # KW credibility
     if data["kw_line"]:
         y = write(data["kw_line"], body_s, 0.12)
 
-    # Offer + CTA
     y = write(data["p3"], body_s, 0.12)
     y = write(data["cta"], body_s, 0.18)
 
-    # Signature
     c.setFont("Helvetica", 10)
     c.setFillColor(GREY)
     c.drawString(x, y, "Warm regards,")
-    y -= 0.38 * inch   # space for pen signature
+    y -= 0.38*inch
 
     c.setFont("Helvetica-Bold", 11)
     c.setFillColor(black)
     c.drawString(x, y, "John Owolabi")
-    y -= 0.17 * inch
+    y -= 0.17*inch
 
     c.setFont("Helvetica", 10)
     c.setFillColor(LGREY)
     c.drawString(x, y, "Founder, Saturn Star Movers")
-    y -= 0.17 * inch
+    y -= 0.17*inch
 
-    # Big bold phone — personal cell first, then branch
     c.setFont("Helvetica-Bold", 12)
     c.setFillColor(NAVY)
     c.drawString(x, y, SSM_CELL + "  (Direct)")
-    y -= 0.17 * inch
+    y -= 0.17*inch
 
     c.setFont("Helvetica", 9.5)
     c.setFillColor(LGREY)
     c.drawString(x, y, f"{branch['phone']}   |   {branch['email']}")
-    y -= 0.17 * inch
+    y -= 0.17*inch
     c.drawString(x, y, branch["website"])
 
     c.save()
 
 
-# ── ENVELOPE ──────────────────────────────────────────────────────────────────
-ENV_W, ENV_H = 9.5 * inch, 4.125 * inch
+ENV_W, ENV_H = 9.5*inch, 4.125*inch
 
 def generate_envelopes(rows, out_path, logo_path=None):
     c = pdfcanvas.Canvas(out_path, pagesize=(ENV_W, ENV_H))
     for row in rows:
-        if not row.get("contact_name","").strip():
+        if not row.get("contact_name", "").strip():
             continue
-        br = branch_for_zone(row.get("zone",""), row.get("city",""))
+        br = branch_for_zone(row.get("zone", ""), row.get("city", ""))
         c.setFillColor(white)
         c.rect(0, 0, ENV_W, ENV_H, fill=1, stroke=0)
         c.setFillColor(NAVY)
@@ -354,42 +323,39 @@ def generate_envelopes(rows, out_path, logo_path=None):
         c.setLineWidth(1.5)
         c.line(3, 0.20*inch, ENV_W, 0.20*inch)
 
-        # Return address — branch-specific
         c.setFont("Helvetica-Bold", 8)
         c.setFillColor(NAVY)
         c.drawString(0.28*inch, ENV_H - 0.35*inch, "Saturn Star Movers")
         c.setFont("Helvetica", 7.5)
         c.setFillColor(LGREY)
         ret_lines = [br["address1"]]
-        if br["city"]: ret_lines.append(br["city"])
+        if br["city"]:
+            ret_lines.append(br["city"])
         ret_lines.append(br["phone"])
         for i, line in enumerate(ret_lines):
             c.drawString(0.28*inch, ENV_H - 0.50*inch - i*0.13*inch, line)
 
-        # Recipient
         rx, ry = ENV_W * 0.38, ENV_H * 0.58
         c.setFont("Helvetica-Bold", 11)
         c.setFillColor(black)
-        c.drawString(rx, ry,             row["contact_name"].strip())
+        c.drawString(rx, ry, row["contact_name"].strip())
         c.setFont("Helvetica", 10)
         c.setFillColor(LGREY)
-        c.drawString(rx, ry-0.20*inch,   row["title"].strip())
-        c.drawString(rx, ry-0.38*inch,   row["company"].strip())
-        c.drawString(rx, ry-0.56*inch,   row["city"].strip() + ", Ontario")
+        c.drawString(rx, ry - 0.20*inch, row["title"].strip())
+        c.drawString(rx, ry - 0.38*inch, row["company"].strip())
+        c.drawString(rx, ry - 0.56*inch, row["city"].strip() + ", Ontario")
 
-        # Stamp box
         c.setStrokeColor(LGREY)
         c.setFillColor(white)
-        c.rect(ENV_W-1.0*inch, ENV_H-0.92*inch, 0.78*inch, 0.62*inch, fill=1, stroke=1)
+        c.rect(ENV_W - 1.0*inch, ENV_H - 0.92*inch, 0.78*inch, 0.62*inch, fill=1, stroke=1)
         c.setFont("Helvetica", 6.5)
         c.setFillColor(LGREY)
-        c.drawCentredString(ENV_W-0.61*inch, ENV_H-0.60*inch, "STAMP")
+        c.drawCentredString(ENV_W - 0.61*inch, ENV_H - 0.60*inch, "STAMP")
 
         c.showPage()
     c.save()
 
 
-# ── MERGE ─────────────────────────────────────────────────────────────────────
 def merge_pdfs(paths, out_path):
     try:
         import pikepdf
@@ -402,7 +368,6 @@ def merge_pdfs(paths, out_path):
         print(f"  Merge skipped ({e}). Use: pdftk letters/*.pdf cat output letters_merged.pdf")
 
 
-# ── LOAD ──────────────────────────────────────────────────────────────────────
 def load_contacts():
     base = Path(__file__).parent
     contacts = []
@@ -411,14 +376,13 @@ def load_contacts():
               "enrichment_results/results_03_tier2.csv"]:
         with open(base / f, newline="", encoding="utf-8") as fh:
             for row in csv.DictReader(fh):
-                status = row.get("linkedin_status","").lower()
-                name   = row.get("contact_name","").strip()
+                status = row.get("linkedin_status", "").lower()
+                name   = row.get("contact_name", "").strip()
                 if name and ("confirmed" in status or "probable" in status):
                     contacts.append(row)
     return contacts
 
 
-# ── MAIN ──────────────────────────────────────────────────────────────────────
 def main(logo_path=None):
     base    = Path(__file__).parent
     out_dir = base / "letters"
@@ -429,8 +393,8 @@ def main(logo_path=None):
 
     pdfs, env_rows = [], []
     for i, row in enumerate(contacts, 1):
-        slug = (row["contact_name"].strip().replace(" ","_")[:28] + "_" +
-                row["company"].strip().replace(" ","_")[:22])
+        slug = (row["contact_name"].strip().replace(" ", "_")[:28] + "_" +
+                row["company"].strip().replace(" ", "_")[:22])
         for ch in r'\:*?"<>|,./':
             slug = slug.replace(ch, "")
         path = str(out_dir / f"{i:03d}_{slug}.pdf")
