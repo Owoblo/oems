@@ -308,49 +308,63 @@ def generate_letter(row, out_path, logo_path=None):
 
 ENV_W, ENV_H = 9.5*inch, 4.125*inch
 
+# Canada Post indicia image (extracted from official envelope template)
+INDICIA_PATH = str(Path(__file__).parent / "canada_post_indicia.jpg")
+
 def generate_envelopes(rows, out_path, logo_path=None):
     c = pdfcanvas.Canvas(out_path, pagesize=(ENV_W, ENV_H))
+
     for row in rows:
         if not row.get("contact_name", "").strip():
             continue
         br = branch_for_zone(row.get("zone", ""), row.get("city", ""))
+
+        # Clean white background
         c.setFillColor(white)
         c.rect(0, 0, ENV_W, ENV_H, fill=1, stroke=0)
-        c.setFillColor(NAVY)
-        c.rect(0, 0, 3, ENV_H, fill=1, stroke=0)
-        c.rect(0, 0, ENV_W, 0.20*inch, fill=1, stroke=0)
-        c.setStrokeColor(GOLD)
-        c.setLineWidth(1.5)
-        c.line(3, 0.20*inch, ENV_W, 0.20*inch)
 
-        c.setFont("Helvetica-Bold", 8)
-        c.setFillColor(NAVY)
-        c.drawString(0.28*inch, ENV_H - 0.35*inch, "Saturn Star Movers")
-        c.setFont("Helvetica", 7.5)
-        c.setFillColor(LGREY)
+        # ── RETURN ADDRESS — top left ─────────────────────────────────────────
+        c.setFont("Helvetica-Bold", 9)
+        c.setFillColor(black)
+        c.drawString(0.30*inch, ENV_H - 0.30*inch, "Saturn Star Movers")
+        c.setFont("Helvetica", 9)
         ret_lines = [br["address1"]]
         if br["city"]:
             ret_lines.append(br["city"])
-        ret_lines.append(br["phone"])
         for i, line in enumerate(ret_lines):
-            c.drawString(0.28*inch, ENV_H - 0.50*inch - i*0.13*inch, line)
+            c.drawString(0.30*inch, ENV_H - 0.44*inch - i*0.145*inch, line)
 
-        rx, ry = ENV_W * 0.38, ENV_H * 0.58
-        c.setFont("Helvetica-Bold", 11)
+        # ── CANADA POST INDICIA — top right ───────────────────────────────────
+        ind_w = 1.55 * inch
+        ind_h = 1.10 * inch
+        ind_x = ENV_W - ind_w - 0.20*inch
+        ind_y = ENV_H - ind_h - 0.10*inch
+        if os.path.exists(INDICIA_PATH):
+            try:
+                c.drawImage(INDICIA_PATH, ind_x, ind_y,
+                            width=ind_w, height=ind_h,
+                            preserveAspectRatio=True, mask="auto")
+            except Exception:
+                pass
+
+        # ── RECIPIENT — centered, large bold italic ───────────────────────────
+        # 4 lines: name, title, company, city+province
+        recip_lines = [
+            row["contact_name"].strip().upper(),
+            row["title"].strip().upper(),
+            row["company"].strip().upper(),
+            row["city"].strip().upper() + "  ON",
+        ]
+        # vertical center of envelope (below the top zone)
+        total_h = len(recip_lines) * 0.285*inch
+        start_y = (ENV_H / 2) + (total_h / 2) - 0.15*inch
+
+        c.setFont("Helvetica-BoldOblique", 18)
         c.setFillColor(black)
-        c.drawString(rx, ry, row["contact_name"].strip())
-        c.setFont("Helvetica", 10)
-        c.setFillColor(LGREY)
-        c.drawString(rx, ry - 0.20*inch, row["title"].strip())
-        c.drawString(rx, ry - 0.38*inch, row["company"].strip())
-        c.drawString(rx, ry - 0.56*inch, row["city"].strip() + ", Ontario")
-
-        c.setStrokeColor(LGREY)
-        c.setFillColor(white)
-        c.rect(ENV_W - 1.0*inch, ENV_H - 0.92*inch, 0.78*inch, 0.62*inch, fill=1, stroke=1)
-        c.setFont("Helvetica", 6.5)
-        c.setFillColor(LGREY)
-        c.drawCentredString(ENV_W - 0.61*inch, ENV_H - 0.60*inch, "STAMP")
+        for i, line in enumerate(recip_lines):
+            text_w_val = c.stringWidth(line, "Helvetica-BoldOblique", 18)
+            cx = (ENV_W - text_w_val) / 2
+            c.drawString(cx, start_y - i * 0.285*inch, line)
 
         c.showPage()
     c.save()
