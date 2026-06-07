@@ -29,12 +29,72 @@ MR = 0.65 * inch
 MT = 0.70 * inch
 MB = 0.55 * inch
 
-SSM_ADDRESS = "7021 Wyandotte Street East"
-SSM_CITY    = "Windsor, ON  N8S 1R1"
-SSM_PHONE   = "(226) 215-9874"
-SSM_EMAIL   = "business@starmovers.ca"
-SSM_WEBSITE = "www.starmovers.ca"
-SSM_CELL    = "226-724-1730"
+SSM_CELL    = "226-724-1730"   # John's personal cell — always shown
+
+# ── BRANCH LOCATIONS (from Google Business Profile master sheet) ──────────────
+BRANCHES = {
+    "windsor": {
+        "address1": "3608 Seminole Street, Unit 3",
+        "city":     "Windsor, ON  N8Y 1Y4",
+        "phone":    "(226) 773-2993",
+        "email":    "windsor@starmovers.ca",
+        "website":  "starmovers.ca/windsor-movers/",
+    },
+    "chatham": {
+        "address1": "220 St Clair Street",
+        "city":     "Chatham, ON  N7L 3J8",
+        "phone":    "226-605-5767",
+        "email":    "chatham@starmovers.ca",
+        "website":  "starmovers.ca/chatham-movers/",
+    },
+    "london": {
+        "address1": "390 Saskatoon St, Unit 207D",
+        "city":     "London, ON  N5W 4R3",
+        "phone":    "(548) 488-3245",
+        "email":    "london@starmovers.ca",
+        "website":  "starmovers.ca/london-movers/",
+    },
+    "kitchener": {
+        "address1": "Kitchener, ON",
+        "city":     "",
+        "phone":    "226-780-6649",
+        "email":    "kitchener@starmovers.ca",
+        "website":  "starmovers.ca/kitchener-movers/",
+    },
+    "waterloo": {
+        "address1": "550 Parkside Drive, Unit B13",
+        "city":     "Waterloo, ON  N2L 5V4",
+        "phone":    "226-780-7014",
+        "email":    "waterloo@starmovers.ca",
+        "website":  "starmovers.ca/waterloo-movers/",
+    },
+    "guelph": {
+        "address1": "55 Cedar Drive",
+        "city":     "Guelph, ON  N1G 1C4",
+        "phone":    "226-780-3158",
+        "email":    "guelph@starmovers.ca",
+        "website":  "starmovers.ca/guelph-movers/",
+    },
+}
+
+def branch_for_zone(zone, city):
+    """Return the nearest branch dict based on zone/city."""
+    z, c = zone.lower(), city.lower()
+    if "chatham" in z or "chatham" in c:
+        return BRANCHES["chatham"]
+    if "london" in z or "london" in c:
+        return BRANCHES["london"]
+    if "guelph" in z or "guelph" in c:
+        return BRANCHES["guelph"]
+    if "waterloo" in z or "waterloo" in c:
+        return BRANCHES["waterloo"]
+    if "kitchener" in z or "kitchener" in c or "cambridge" in c:
+        return BRANCHES["kitchener"]
+    if "woodstock" in c or "brantford" in c or "paris" in c:
+        return BRANCHES["guelph"]
+    if "sarnia" in z or "sarnia" in c or "lambton" in z:
+        return BRANCHES["windsor"]
+    return BRANCHES["windsor"]   # default
 
 KW_CITIES = {
     "kitchener","waterloo","cambridge","guelph","woodstock","ayr","breslau",
@@ -80,6 +140,7 @@ def build_content(row):
     group   = classify(title)
     is_kw   = city.lower() in KW_CITIES
     region  = region_label(zone, city)
+    branch  = branch_for_zone(zone, city)
 
     # Para 1 — personal opening, mention their name and company
     if group == "owner":
@@ -143,12 +204,11 @@ def build_content(row):
     )
 
     return dict(first=first, company=company, city=city, region=region,
-                p1=p1, p2=p2, kw_line=kw_line, p3=p3, cta=cta)
+                p1=p1, p2=p2, kw_line=kw_line, p3=p3, cta=cta, branch=branch)
 
 
-def draw_letterhead(c, logo_path):
-    """Logo top-right, company name + address top-left, thin rule below."""
-    # Logo
+def draw_letterhead(c, branch, logo_path):
+    """Logo top-right, branch address top-left, thin gold rule below."""
     logo_w = 1.3 * inch
     logo_h = 1.0 * inch
     logo_x = PAGE_W - MR - logo_w
@@ -161,20 +221,21 @@ def draw_letterhead(c, logo_path):
         except Exception:
             pass
 
-    # Company name
     c.setFont("Helvetica-Bold", 17)
     c.setFillColor(NAVY)
     c.drawString(ML, PAGE_H - MT - 0.14*inch, "Saturn Star Movers")
 
-    # Address lines
     c.setFont("Helvetica", 8.5)
     c.setFillColor(LGREY)
     ay = PAGE_H - MT - 0.32*inch
-    for line in [SSM_ADDRESS, SSM_CITY, SSM_PHONE, SSM_EMAIL]:
+    addr_lines = [branch["address1"]]
+    if branch["city"]:
+        addr_lines.append(branch["city"])
+    addr_lines += [branch["phone"], branch["email"]]
+    for line in addr_lines:
         c.drawString(ML, ay, line)
         ay -= 0.135*inch
 
-    # Thin gold rule
     rule_y = PAGE_H - MT - 0.95*inch
     c.setStrokeColor(GOLD)
     c.setLineWidth(1.2)
@@ -185,8 +246,9 @@ def generate_letter(row, out_path, logo_path=None):
     data  = build_content(row)
     today = date.today().strftime("%B %d, %Y")
 
+    branch = data["branch"]
     c = pdfcanvas.Canvas(out_path, pagesize=letter)
-    draw_letterhead(c, logo_path)
+    draw_letterhead(c, branch, logo_path)
 
     text_w = PAGE_W - ML - MR
     x      = ML
@@ -259,15 +321,17 @@ def generate_letter(row, out_path, logo_path=None):
     c.drawString(x, y, "Founder, Saturn Star Movers")
     y -= 0.17 * inch
 
-    # Big bold phone
+    # Big bold phone — personal cell first, then branch
     c.setFont("Helvetica-Bold", 12)
     c.setFillColor(NAVY)
-    c.drawString(x, y, SSM_CELL)
+    c.drawString(x, y, SSM_CELL + "  (Direct)")
     y -= 0.17 * inch
 
     c.setFont("Helvetica", 9.5)
     c.setFillColor(LGREY)
-    c.drawString(x, y, f"{SSM_EMAIL}   |   {SSM_WEBSITE}")
+    c.drawString(x, y, f"{branch['phone']}   |   {branch['email']}")
+    y -= 0.17 * inch
+    c.drawString(x, y, branch["website"])
 
     c.save()
 
@@ -280,6 +344,7 @@ def generate_envelopes(rows, out_path, logo_path=None):
     for row in rows:
         if not row.get("contact_name","").strip():
             continue
+        br = branch_for_zone(row.get("zone",""), row.get("city",""))
         c.setFillColor(white)
         c.rect(0, 0, ENV_W, ENV_H, fill=1, stroke=0)
         c.setFillColor(NAVY)
@@ -289,13 +354,16 @@ def generate_envelopes(rows, out_path, logo_path=None):
         c.setLineWidth(1.5)
         c.line(3, 0.20*inch, ENV_W, 0.20*inch)
 
-        # Return address
+        # Return address — branch-specific
         c.setFont("Helvetica-Bold", 8)
         c.setFillColor(NAVY)
         c.drawString(0.28*inch, ENV_H - 0.35*inch, "Saturn Star Movers")
         c.setFont("Helvetica", 7.5)
         c.setFillColor(LGREY)
-        for i, line in enumerate([SSM_ADDRESS, SSM_CITY, SSM_PHONE]):
+        ret_lines = [br["address1"]]
+        if br["city"]: ret_lines.append(br["city"])
+        ret_lines.append(br["phone"])
+        for i, line in enumerate(ret_lines):
             c.drawString(0.28*inch, ENV_H - 0.50*inch - i*0.13*inch, line)
 
         # Recipient
