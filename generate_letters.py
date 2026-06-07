@@ -311,13 +311,47 @@ ENV_W, ENV_H = 9.5*inch, 4.125*inch
 # Canada Post indicia image (extracted from official envelope template)
 INDICIA_PATH = str(Path(__file__).parent / "canada_post_indicia.jpg")
 
+# Build address lookup from batch files
+def _build_addr_map():
+    base = Path(__file__).parent / "enrichment_batches"
+    addr = {}
+    if base.exists():
+        for f in sorted(base.glob("*.csv")):
+            with open(f, newline="", encoding="utf-8") as fh:
+                for row in csv.DictReader(fh):
+                    co = row.get("company", "").strip()
+                    a  = row.get("address", "").strip().replace(", Canada", "")
+                    if co and a:
+                        addr[co] = a
+    return addr
+
+ADDR_MAP = _build_addr_map()
+
+def _parse_address(raw):
+    """Split 'STREET, CITY, ON POSTAL' into (street_line, city_prov_postal)."""
+    parts = [p.strip() for p in raw.split(",")]
+    # Typical format: street, city, ON POSTAL
+    if len(parts) >= 3:
+        street = parts[0]
+        rest   = ", ".join(parts[1:])
+        return street.upper(), rest.upper()
+    return raw.upper(), ""
+
 def generate_envelopes(rows, out_path, logo_path=None):
     c = pdfcanvas.Canvas(out_path, pagesize=(ENV_W, ENV_H))
 
     for row in rows:
         if not row.get("contact_name", "").strip():
             continue
-        br = branch_for_zone(row.get("zone", ""), row.get("city", ""))
+        br      = branch_for_zone(row.get("zone", ""), row.get("city", ""))
+        company = row["company"].strip()
+        city    = row["city"].strip()
+
+        # Look up full address — skip this envelope if no address found
+        raw_addr = ADDR_MAP.get(company, "")
+        if not raw_addr:
+            continue   # no address = no envelope
+        street_line, city_prov_post = _parse_address(raw_addr)
 
         # Clean white background
         c.setFillColor(white)
@@ -347,24 +381,31 @@ def generate_envelopes(rows, out_path, logo_path=None):
             except Exception:
                 pass
 
-        # ── RECIPIENT — centered, large bold italic ───────────────────────────
-        # 4 lines: name, title, company, city+province
-        recip_lines = [
-            row["contact_name"].strip().upper(),
-            row["title"].strip().upper(),
-            row["company"].strip().upper(),
-            row["city"].strip().upper() + "  ON",
-        ]
-        # vertical center of envelope (below the top zone)
-        total_h = len(recip_lines) * 0.285*inch
-        start_y = (ENV_H / 2) + (total_h / 2) - 0.15*inch
+        # ── RECIPIENT BLOCK — centered, bold italic, smaller font ─────────────
+        font_name = "Helvetica-BoldOblique"
+        font_size = 13
+        line_h    = 0.235 * inch
 
-        c.setFont("Helvetica-BoldOblique", 18)
+        recip_lines = [row["contact_name"].strip().upper()]
+        recip_lines.append(row["title"].strip().upper())
+        recip_lines.append(company.upper())
+        if street_line:
+            recip_lines.append(street_line)
+        recip_lines.append(city_prov_post)
+
+        total_block_h = len(recip_lines) * line_h
+        # Center vertically in the body area (below top 1.3" zone)
+        body_top = ENV_H - 1.3*inch
+        body_bot = 0.3*inch
+        mid_y    = (body_top + body_bot) / 2
+        start_y  = mid_y + total_block_h / 2
+
+        c.setFont(font_name, font_size)
         c.setFillColor(black)
         for i, line in enumerate(recip_lines):
-            text_w_val = c.stringWidth(line, "Helvetica-BoldOblique", 18)
-            cx = (ENV_W - text_w_val) / 2
-            c.drawString(cx, start_y - i * 0.285*inch, line)
+            tw = c.stringWidth(line, font_name, font_size)
+            cx = (ENV_W - tw) / 2
+            c.drawString(cx, start_y - i * line_h, line)
 
         c.showPage()
     c.save()
