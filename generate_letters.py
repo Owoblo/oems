@@ -80,16 +80,18 @@ def branch_for_zone(zone, city):
     c = city.lower()
     if "zone 2" in z or "chatham" in z or "chatham" in c:
         return BRANCHES["chatham"]
+    if "zone 3" in z or "sarnia" in z or "lambton" in z or "sarnia" in c or "corunna" in c or "petrolia" in c or "forest" in c or "brigden" in c:
+        return BRANCHES["london"]
     if "zone 4" in z or "london" in z or "london" in c:
         return BRANCHES["london"]
-    if "zone 5" in z or "woodstock" in z or "woodstock" in c or "brantford" in c:
-        return BRANCHES["guelph"]
-    if "zone 6" in z or "kitchener" in z or "kitchener" in c or "cambridge" in c:
-        return BRANCHES["kitchener"]
-    if "waterloo" in z or "waterloo" in c:
-        return BRANCHES["waterloo"]
+    if "zone 5" in z or "woodstock" in z or "woodstock" in c or "brantford" in c or "tillsonburg" in c or "ingersoll" in c or "norwich" in c or "stratford" in c:
+        return BRANCHES["london"]
     if "guelph" in z or "guelph" in c:
         return BRANCHES["guelph"]
+    if "waterloo" in z or "waterloo" in c:
+        return BRANCHES["waterloo"]
+    if "zone 6" in z or "kitchener" in z or "kitchener" in c or "cambridge" in c:
+        return BRANCHES["kitchener"]
     return BRANCHES["windsor"]
 
 KW_CITIES = {
