@@ -185,7 +185,8 @@ def build_content(row):
 
     cta = (
         f"I would love a quick 10-minute call with you, {first}. "
-        f"Call or text me directly at <b>{SSM_CELL}</b> and I will make it easy on your end."
+        f"You can reach me directly at <b>{SSM_CELL}</b> or shoot me an email at <b>john@starmovers.ca</b> — "
+        f"either way, I will make it easy on your end."
     )
 
     return dict(first=first, company=company, city=city, region=region,
@@ -296,14 +297,12 @@ def generate_letter(row, out_path, logo_path=None):
 
     c.setFont("Helvetica-Bold", 12)
     c.setFillColor(NAVY)
-    c.drawString(x, y, SSM_CELL + "  (Direct)")
+    c.drawString(x, y, SSM_CELL + "  (Direct)   |   john@starmovers.ca")
     y -= 0.17*inch
 
     c.setFont("Helvetica", 9.5)
     c.setFillColor(LGREY)
-    c.drawString(x, y, f"{branch['phone']}   |   {branch['email']}")
-    y -= 0.17*inch
-    c.drawString(x, y, branch["website"])
+    c.drawString(x, y, f"{branch['phone']}   |   {branch['website']}")
 
     c.save()
 
