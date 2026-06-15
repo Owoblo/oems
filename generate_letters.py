@@ -447,6 +447,9 @@ def main(logo_path=None):
     contacts = load_contacts()
     print(f"Generating {len(contacts)} letters...")
 
+    # Only generate letters for contacts that have a confirmed mailing address
+    contacts = [r for r in contacts if ADDR_MAP.get(r["company"].strip())]
+
     pdfs, env_rows = [], []
     for i, row in enumerate(contacts, 1):
         slug = (row["contact_name"].strip().replace(" ", "_")[:28] + "_" +
